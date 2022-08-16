@@ -1,0 +1,15 @@
+.title {
+    font-weight: 500;
+    margin-bottom: 4px;
+    display: block;
+}
+.text {
+    margin-bottom: 5px;
+}
+.text2 {
+    margin-bottom: 10px;
+}
+.bottom {
+    display: flex;
+    justify-content: space-between;
+}

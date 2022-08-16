@@ -1,0 +1,28 @@
+.workersListTitle{
+    margin-bottom: 4px;
+    display: block;
+}
+.timeControl {
+    display: flex;
+    line-height: 29px;
+    margin-bottom: 5px;
+}
+.timeControl span {
+    margin: 0 2px;
+    font-weight: 500;
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    background-color: #eee;
+    margin-bottom: 9px;
+}
+
+.top span {
+    line-height: 30px;
+}
+
+.status {
+    margin-right: 2px;
+}

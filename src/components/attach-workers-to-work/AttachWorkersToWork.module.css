@@ -1,0 +1,28 @@
+.workersList {
+    list-style: none;
+}
+.job:first-child {
+    padding-top: 0;
+}
+.job:last-child {
+    border-bottom: none;
+}
+.job {
+    border-bottom: 1px dotted #333;
+    padding-top: 6px;
+}
+.top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.phoneName {
+    display: flex;
+    flex-direction: column;
+}
+.phone {
+    font-weight: 500;
+}
+.firstName {
+    text-align: right;
+}

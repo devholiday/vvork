@@ -1,38 +1,219 @@
+* {
+  margin: 0;
+  padding: 0;
+
+  font-family: 'Roboto', sans-serif;
+  font-size: 13px;
+}
+
+input {
+  border: 1px solid #000;
+  border-radius: 2px;
+  padding: 0 3px;
+  height: 29px;
+  width: 100%;
+  box-sizing: border-box;
+}
+input[type=checkbox] {
+  width: unset!important;
+  float: left;
+  margin-right: 6px;
+  height: 15px;
+}
+input[type=checkbox],input[type=submit] {
+  width: unset!important;
+}
+textarea {
+  border: 1px solid #000;
+  border-radius: 2px;
+  padding: 6px 3px;
+  width: 100%;
+  height: 60px;
+  box-sizing: border-box;
+}
+button, input[type=submit] {
+  border: 1px solid #333;
+  padding: 3px 5px;
+  margin-bottom: 10px;
+  border-radius: 2px;
+  cursor: pointer;
+  background-color: ghostwhite;
+  box-shadow: 4px 4px #888888;
+}
+select {
+  width: 100%;
+  height: 29px;
+}
+label {
+  display: block;
+  margin-bottom: 1px;
+  color: #333;
+}
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+a {
+  color: blue;
+  text-decoration: none;
+  border-bottom: 1px solid blue;
+}
+hr {
+  margin-bottom: 16px;
+}
+
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+  width: 320px;
+  padding: 5px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+.App-header .logo {
+  font-weight: 500;
+  font-size: 18px;
+  color: #333;
+  border-bottom: none;
+}
+.greeting {
+  font-weight: 500;
+  line-height: 21.6px;
+}
+.links {
+  margin-bottom: 14px;
+}
+.links ul {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+}
+.links li {
+  cursor: pointer;
+  padding: 4px 0;
+}
+
+.content {
+  width: 100%;
+}
+.content h2 {
+  margin: 0 0 14px 0;
+  border-bottom: 1px dotted #333;
+  padding-bottom: 2px;
+  font-weight: 500;
+}
+.content h3 {
+  margin-bottom: 6px;
+  font-weight: 500;
+  font-size: 12px;
+}
+.content .container-header {
+  margin-bottom: 6px;
+}
+.content .container-header h2 {
+  font-size: 14px;
+  font-weight: 500;
+}
+.content .container-header button {
+}
+.content form {
+  display: inline-block;
+  margin-bottom: 16px;
+  width: 100%;
+}
+.content .block {
+  margin-bottom: 16px;
+}
+
+.form-block {
+  margin-bottom: 12px;
+}
+.form-block span {
+  display: block;
+  margin-bottom: 1px;
+  color: #333;
+}
+
+.btn-danger {
+  background-color: darksalmon!important;
+}
+.btn-success {
+  background-color: darkseagreen!important;
+}
+.btn-secondary {
+  background-color: ghostwhite!important;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+.alert-block {
+  margin-top: 13px;
+}
+.alert-block .title {
+  font-weight: 500;
+  display: block;
+}
+.alert-block .desc {
+  margin: 10px 0;
+}
+.danger {
+  color: red;
+}
+.listItems li {
+  border-bottom: 1px dotted #333;
+  margin-top: 13px;
+}
+
+.label {
+  background-color: ghostwhite;
+  padding: 4px 8px;
+  border-radius: 12px;
+  border: 1px solid #333333;
+  height: 14px;
+}
+.label.label-success {
+  background-color: darkseagreen;
+}
+.label.label-danger {
+  background-color: darksalmon;
+}
+
+.list-links li a {
+  line-height: 30px;
+}
+
+.input-box {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  max-width: 300px;
+  background: #fff;
+  border: 1px solid #000000;
+  border-radius: 2px;
+  padding-left: 0.5rem;
+  overflow: hidden;
+  font-family: sans-serif;
 }
-
-.App-link {
-  color: #61dafb;
+.input-box .prefix {
+  font-weight: 300;
+  font-size: 13px;
+  color: #999;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.input-box input {
+  flex-grow: 1;
+  font-size: 13px;
+  background: #fff;
+  border: none;
+  outline: none;
+  padding: 0.5rem;
+}
+.input-box:focus-within {
+  border-color: #777;
 }
