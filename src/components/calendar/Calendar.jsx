@@ -3,13 +3,13 @@ import {useEffect, useState} from "react";
 import {computeCalendar} from "../../utils/calendar";
 import {collection, getDocs, getFirestore, query, where} from "firebase/firestore";
 
-const Calendar = ({workId, handleClickEnabledDay}) => {
+const Calendar = ({workId, handleClickEnabledDay, config}) => {
     const db = getFirestore();
 
     const [calendar, setCalendar] = useState();
 
     useEffect(() => {
-        setCalendar(computeCalendar(null, null));
+        setCalendar(computeCalendar(null, null, config));
 
         getEvents();
     }, []);
@@ -38,11 +38,11 @@ const Calendar = ({workId, handleClickEnabledDay}) => {
     };
 
     const goToPrevMonth = async () => {
-        setCalendar(computeCalendar(calendar?.prevYear, calendar?.prevMonth));
+        setCalendar(computeCalendar(calendar?.prevYear, calendar?.prevMonth, config));
         await getEvents(calendar?.prevYear, calendar?.prevMonth);
     }
     const goToNextMonth = async () => {
-        setCalendar(computeCalendar(calendar?.nextYear, calendar?.nextMonth))
+        setCalendar(computeCalendar(calendar?.nextYear, calendar?.nextMonth, config))
         await getEvents(calendar?.nextYear, calendar?.nextMonth);
     }
 

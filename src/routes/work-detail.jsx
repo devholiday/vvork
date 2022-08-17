@@ -6,6 +6,7 @@ import ShiftsAdd from "../components/shift-add/ShiftsAdd";
 import {useNavigate, useParams} from "react-router-dom";
 
 export default function WorkDetail() {
+    const [event, setEvent] = useState(null);
     const [job, setJob] = useState();
 
     const {workId} = useParams();
@@ -28,8 +29,8 @@ export default function WorkDetail() {
         fetchData();
     }, []);
 
-    const showDetailEvent = (year, month, day) => {
-        // console.log(year, month, day)
+    const showDetailEvent = data => {
+        setEvent(data);
     };
 
     return (
@@ -71,15 +72,18 @@ export default function WorkDetail() {
             )}
             {job?.schedule && (
                 <div className="block">
-                    <h3>РАСПИСАНИЕ</h3>
+                    <h3>ГРАФИК</h3>
                     <p>{job?.schedule === 'float' && 'Плавающий'}</p>
                     <p>{job?.schedule === 'regular' && 'обычный'}</p>
                 </div>
             )}
 
-            <Schedule workId={workId} handleClickEnabledDay={showDetailEvent}/>
+            <Schedule workId={workId} handleClickEnabledDay={showDetailEvent} config={{enabledAll: true}}/>
 
-            {user.role === 'worker' && job && <ShiftsAdd workId={workId} atNight={job.atNight} time={job.time} />}
+            {user.role === 'worker' &&
+                event && event.eventId &&
+                <ShiftsAdd workId={workId} atNight={job.atNight} time={event.time ?? job.time} eventId={event.eventId}
+                           year={event.year} month={event.month} day={event.day} />}
         </>
     );
 }

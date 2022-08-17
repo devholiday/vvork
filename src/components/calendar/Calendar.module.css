@@ -1,7 +1,8 @@
 .calendar {
     display: inline-block;
     width: 285px;
-    min-width: 285px
+    min-width: 285px;
+    user-select: none;
 }
 .navs {
     display: flex;

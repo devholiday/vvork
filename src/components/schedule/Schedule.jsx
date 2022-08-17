@@ -3,11 +3,11 @@ import Events from "../events/Events";
 
 import style from './Schedule.module.css';
 
-const Schedule = ({workId, handleClickEnabledDay}) => {
+const Schedule = ({workId, handleClickEnabledDay, config}) => {
     return (
         <div className={'block ' + style.schedule}>
             <h3>ГРАФИК РАБОТЫ</h3>
-            <Calendar workId={workId} handleClickEnabledDay={handleClickEnabledDay}/>
+            <Calendar workId={workId} handleClickEnabledDay={handleClickEnabledDay} config={config}/>
             <Events />
         </div>
     );

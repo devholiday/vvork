@@ -1,6 +1,8 @@
-export const computeCalendar = (year=null, month=null) => {
+export const computeCalendar = (year=null, month=null, config={}) => {
     const months = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
     const daysWeek = ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'];
+
+    config = {enabledYesterday: false, enabledAll: false, ...config};
 
     const date = new Date();
     year = year ?? date.getFullYear();
@@ -37,7 +39,9 @@ export const computeCalendar = (year=null, month=null) => {
                         inCurrentMonth: true,
                         dayOff: j === 6,
                         current: counter === day,
-                        enabled: counter > day && j !== 6
+                        enabled: config.enabledAll ? true :
+                            (day && counter >= (config.enabledYesterday ?
+                            new Date(year, month, day-1).getDate(): day) && j !== 6)
                     });
                 } else {
                     counterNextMonth += 1;
