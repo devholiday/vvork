@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 
 const WorksWorker = () => {
     const [listItems, setListItems] = useState([]);
+    const [listItemsWorker, setListItemsWorker] = useState([]);
     const db = getFirestore();
     const auth = getAuth();
 
@@ -39,10 +40,30 @@ const WorksWorker = () => {
         });
     }, []);
 
+    useEffect(() => {
+        const jobInvitationsRef = collection(db, "worksWorker");
+        const q = query(jobInvitationsRef,
+            where("workerId", "==", auth.currentUser.uid));
+        getDocs(q).then(async querySnapshot => {
+            const works = [];
+
+            querySnapshot.forEach((docSnap) => {
+                works.push(<li key={docSnap.id}>
+                    <Link to={'/works/worker/edit/'+docSnap.id}>{docSnap.data().title}</Link>
+                </li>);
+            });
+
+            setListItemsWorker(works);
+        });
+    }, []);
+
     return (
         <div>
             <h2>Мои работы</h2>
+            <Link to={'/works/worker/new'}>Создать работу</Link>
+
             <ul className="list-links">{listItems}</ul>
+            <ul className="list-links">{listItemsWorker}</ul>
         </div>
     );
 };

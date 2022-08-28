@@ -14,6 +14,9 @@ import Login from "./routes/login";
 import WorkNew from "./routes/work-new";
 import WorkEdit from "./routes/work-edit";
 import WorkDetail from "./routes/work-detail";
+import WorkWorkerNew from "./routes/work-worker-new";
+import WorkWorkerEdit from "./routes/work-worker-edit";
+import ShiftsWorkerWOAgent from "./components/shifts-worker-wo-agent/ShiftsWorkerWOAgent";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -25,7 +28,10 @@ root.render(
                 <Route path="works/new" element={<WorkNew />} />
                 <Route path="works/edit/:workId" element={<WorkEdit />} />
                 <Route path="works/:workId" element={<WorkDetail />} />
+                <Route path="works/worker/new" element={<WorkWorkerNew />} />
+                <Route path="works/worker/edit/:workId" element={<WorkWorkerEdit />} />
                 <Route path="shifts" element={<Shifts />} />
+                <Route path="shifts/worker" element={<ShiftsWorkerWOAgent />} />
                 <Route path="account" element={<Account />} />
             </Route>
 

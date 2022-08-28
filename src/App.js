@@ -72,7 +72,7 @@ function App() {
                                       color: isActive ? "#333333" : "",
                                       borderBottom: isActive ? "none" : "1px solid blue",
                                   };
-                              }} to="/shifts">Смены</NavLink>
+                              }} to="/shifts/worker">Смены</NavLink>
                           </li>
                           <li>
                               <NavLink style={({ isActive }) => {

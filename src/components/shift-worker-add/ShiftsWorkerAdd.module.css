@@ -1,0 +1,37 @@
+.shifts {
+    margin-top: 13px;
+}
+.date {
+    margin-bottom: 10px;
+}
+.time {
+    display: flex;
+    justify-content: space-between;
+}
+.timeStart {
+    width: 80px;
+    display: inline-block;
+}
+.timeStart span, .timeEnd span {
+    margin-bottom: 2px;
+    display: inline-block;
+}
+.timeEnd {
+    width: 80px;
+    display: inline-block;
+}
+.timeStart button, .timeEnd button {
+    width: 100%;
+}
+.timeControl {
+    display: flex;
+    line-height: 29px;
+    margin-bottom: 5px;
+}
+.timeControl span {
+    margin: 0 2px;
+    font-weight: 500;
+}
+.btnSubmit input[type=submit] {
+    width: 100% !important;
+}
