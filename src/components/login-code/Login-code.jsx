@@ -1,30 +1,37 @@
-import {doc, setDoc, getFirestore} from "firebase/firestore";
+import {doc, setDoc, getFirestore, } from "firebase/firestore";
+import {getAdditionalUserInfo } from "firebase/auth";
+import {useForm} from "react-hook-form";
 
 const LoginCode = () => {
-    function getCodeFromUserInput() {
-        return document.querySelector('.login-code').value;
-    }
+    const { register, handleSubmit } = useForm();
 
-    const confirmCode = () => {
-        const code = getCodeFromUserInput();
+    const onSubmit = async data => {
+        try {
+            const {code} = data;
 
-        window.confirmationResult.confirm(code).then(async (result) => {
-            const user = result.user;
+            window.confirmationResult.confirm(code).then(async (result) => {
+                const user = result.user;
 
-            const db = getFirestore();
-            await setDoc(doc(db, "users", user.uid),
-                {id: user.uid, phoneNumber: user.phoneNumber});
-        }).catch((error) => {
-            // User couldn't sign in (bad verification code?)
-        });
+                const {isNewUser} = getAdditionalUserInfo(result);
+                if (isNewUser) {
+                    const db = getFirestore();
+                    await setDoc(doc(db, "users", user.uid), {id: user.uid, phoneNumber: user.phoneNumber});
+                }
+            }).catch((error) => {
+                // User couldn't sign in (bad verification code?)
+                throw error;
+            });
+        } catch (e) {
+            console.log(e);
+        }
     };
 
     return (
-        <form method='post'>
+        <form onSubmit={handleSubmit(onSubmit)}>
             <div className="form-block">
-                <input type='input' className='login-code' placeholder="Код подтверждения" />
+                <input type='input' {...register("code", { required: true })} placeholder="Код подтверждения" />
             </div>
-            <button type='button' onClick={confirmCode}>Подтвердить код</button>
+            <input className="btn-secondary" type="submit" value="Подтвердить код" />
         </form>
     );
 };

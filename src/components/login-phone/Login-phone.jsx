@@ -18,6 +18,9 @@ const LoginPhone = ({setStep}) => {
 
         function onSignInSubmit() {
             const phoneNumber = getPhoneNumberFromUserInput();
+            if (!phoneNumber) {
+                return;
+            }
             const appVerifier = window.recaptchaVerifier;
 
             signInWithPhoneNumber(auth, phoneNumber, appVerifier)
