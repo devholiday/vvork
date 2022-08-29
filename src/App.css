@@ -217,3 +217,8 @@ hr {
 .input-box:focus-within {
   border-color: #777;
 }
+
+.errorInput {
+  color: darkred;
+  margin-bottom: 3px;
+}
