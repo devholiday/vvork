@@ -82,8 +82,6 @@ const ShiftsWorkerWOAgent = () => {
         const shifts = [];
 
         for (const shift of shiftsData) {
-            const work = await getWorkById(shift.workId);
-
             const {start, end} = shift.time;
 
             let hours = +(24-start.hours) + +end.hours;
@@ -93,15 +91,15 @@ const ShiftsWorkerWOAgent = () => {
                 minutes -= 60;
             }
 
-            if (minutes - +work.break < 0) {
+            if (minutes - shift.break < 0) {
                 hours -= 1;
-                minutes += +work.break;
+                minutes += shift.break;
             } else {
-                minutes -= +work.break;
+                minutes -= shift.break;
             }
 
             const m = hours*60 + minutes;
-            let money = +(+work.salary/60).toFixed(5) * m;
+            let money = +(shift.salary/60).toFixed(5) * m;
             money = +money.toFixed(2);
 
             setAnalytics(prevState => {
@@ -121,12 +119,12 @@ const ShiftsWorkerWOAgent = () => {
             shifts.push({
                 id: shift.id,
                 day: shift.day,
-                place: work.title,
+                place: shift.title,
                 interval: `${start.hours}:${start.minutes} - ${end.hours}:${end.minutes}`,
                 time: {hours, minutes},
-                salary: +work.salary,
+                salary: shift.salary,
                 money,
-                break: +work.break
+                break: shift.break
             });
         }
 

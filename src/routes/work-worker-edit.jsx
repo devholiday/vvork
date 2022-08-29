@@ -55,7 +55,8 @@ export default function WorkWorkerEdit () {
 
             <Schedule workId={workId} handleClickEnabledDay={showDetailEvent} config={{enabledAll: true}}/>
             {event && <ShiftsWorkerAdd workId={workId} atNight={getValues('atNight')} time={getValues('time')}
-                                 event={event}/>}
+                                       title={getValues('title')} salary={getValues('salary')} breakTime={getValues('break')}
+                                       event={event}/>}
 
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="form-block">

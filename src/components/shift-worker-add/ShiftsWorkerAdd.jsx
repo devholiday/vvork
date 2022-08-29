@@ -5,7 +5,7 @@ import {getAuth} from "firebase/auth";
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 
-const ShiftsWorkerAdd = ({workId, atNight, time: timeWork, event}) => {
+const ShiftsWorkerAdd = ({workId, atNight, time: timeWork, title, salary, breakTime, event}) => {
     const [time, setTime] = useState(timeWork);
 
     const db = getFirestore();
@@ -53,7 +53,10 @@ const ShiftsWorkerAdd = ({workId, atNight, time: timeWork, event}) => {
                 numWeek,
                 dayWeek,
                 status: 'completed',
-                time, atNight
+                time, atNight,
+                salary: +salary,
+                break: +breakTime,
+                title
             });
 
             navigate('/shifts/worker');
