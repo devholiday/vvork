@@ -49,7 +49,7 @@ const WorksWorker = () => {
 
             querySnapshot.forEach((docSnap) => {
                 works.push(<li key={docSnap.id}>
-                    <Link to={'/works/worker/edit/'+docSnap.id}>{docSnap.data().title}</Link>
+                    <Link to={'/works/worker/'+docSnap.id}>{docSnap.data().title}</Link>
                 </li>);
             });
 

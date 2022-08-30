@@ -222,3 +222,13 @@ hr {
   color: darkred;
   margin-bottom: 3px;
 }
+
+.timeControl {
+  display: flex;
+  line-height: 29px;
+  margin-bottom: 5px;
+}
+.timeControl span {
+  margin: 0 2px;
+  font-weight: 500;
+}

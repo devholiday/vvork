@@ -2,10 +2,7 @@ import {doc, getDoc, getFirestore, updateDoc} from "firebase/firestore";
 import {getAuth} from "firebase/auth";
 import {useForm} from "react-hook-form";
 import {useEffect, useState} from "react";
-import Schedule from "../components/schedule/Schedule";
 import {useNavigate, useParams} from "react-router-dom";
-import style from "../components/event-new/EventNew.module.css";
-import ShiftsWorkerAdd from "../components/shift-worker-add/ShiftsWorkerAdd";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 
@@ -16,7 +13,6 @@ const schema = yup.object({
 }).required();
 
 export default function WorkWorkerEdit () {
-    const [event, setEvent] = useState();
     const {workId} = useParams();
     const navigate = useNavigate();
 
@@ -50,23 +46,19 @@ export default function WorkWorkerEdit () {
     const onSubmit = async data => {
         const docRef = doc(db, "worksWorker", workId);
         await updateDoc(docRef, data);
-    };
 
-    const showDetailEvent = data => {
-        setEvent(data)
+        navigate('/works/worker/'+workId);
     };
 
     return (
         <>
             <div className="container-header">
                 <h2>{getValues('title')}</h2>
-                <button onClick={() => navigate('/works')}>Вернуться</button>
+                <div className="form-buttons">
+                    <button onClick={() => navigate('/works')}>Мои работы</button>
+                    <button onClick={() => navigate('/works/worker/'+workId)}>Подробнее</button>
+                </div>
             </div>
-
-            <Schedule workId={workId} handleClickEnabledDay={showDetailEvent} config={{enabledAll: true}}/>
-            {event && <ShiftsWorkerAdd workId={workId} atNight={getValues('atNight')} time={getValues('time')}
-                                       title={getValues('title')} salary={getValues('salary')} breakTime={getValues('break')}
-                                       event={event}/>}
 
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="form-block">
@@ -93,7 +85,7 @@ export default function WorkWorkerEdit () {
                 </div>
                 <div className="form-block">
                     <label>Начало</label>
-                    <div className={style.timeControl}>
+                    <div className="timeControl">
                         <input {...register("time.start.hours")} placeholder="18" />
                         <span> : </span>
                         <input {...register("time.start.minutes")} placeholder="00" />
