@@ -66,16 +66,6 @@ const ShiftsWorkerWOAgent = () => {
             return null;
         }
     };
-    const getWorkById = async workId => {
-        const docRef = doc(db, "worksWorker", workId);
-        const docSnap = await getDoc(docRef);
-
-        if (docSnap.exists()) {
-            return docSnap.data();
-        } else {
-            return null;
-        }
-    };
 
     const getComplexShifts = async (year=new Date().getFullYear(), month=new Date().getMonth()) => {
         const shiftsData = await getShifts(year, month);
@@ -124,7 +114,9 @@ const ShiftsWorkerWOAgent = () => {
                 time: {hours, minutes},
                 salary: shift.salary,
                 money,
-                break: shift.break
+                break: shift.break,
+                year: shift.year,
+                month: shift.month,
             });
         }
 
@@ -138,7 +130,7 @@ const ShiftsWorkerWOAgent = () => {
 
         const shifts = await getComplexShifts(calendar?.prevYear, calendar?.prevMonth);
         setShifts(shifts);
-    }
+    };
     const goToNextMonth = async () => {
         setCalendar(computeCalendar(calendar?.nextYear, calendar?.nextMonth))
 
@@ -146,7 +138,15 @@ const ShiftsWorkerWOAgent = () => {
 
         const shifts = await getComplexShifts(calendar?.nextYear, calendar?.nextMonth);
         setShifts(shifts);
-    }
+    };
+
+    const shareWhatsApp = () => {
+        const message = shifts.reduce((acc, shift) => {
+            acc += `${shift.day}.${shift.month+1}.${shift.year} ${shift.interval}%0A`;
+            return acc;
+        }, '');
+        window.open( "https://wa.me/?text=" + message, '_blank');
+    };
 
     return (
       <>
@@ -169,6 +169,10 @@ const ShiftsWorkerWOAgent = () => {
                       <span className={style.valueInCircle}>{analytics.ttlMoney.toFixed(2)}</span>
                       <span className={style.keyInCircle}>ШЕКЕЛЕЙ</span>
                   </div>
+              </div>
+              <div>
+                  <span>Поделиться:</span>
+                  <button type="button" onClick={shareWhatsApp}>WhatsApp</button>
               </div>
               <ul className={style.alerts}>
                   <li>* Если у работы есть перерыв, то его время вычитается из вашего заработка</li>
