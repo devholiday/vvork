@@ -106,7 +106,7 @@ const ShiftsWorkerWOAgent = () => {
                 prevState.time.hours += hours;
                 prevState.time.minutes += minutes;
 
-                if (prevState.time.minutes > 60) {
+                if (prevState.time.minutes >= 60) {
                     prevState.time.hours += 1;
                     prevState.time.minutes -= 60;
                 }
