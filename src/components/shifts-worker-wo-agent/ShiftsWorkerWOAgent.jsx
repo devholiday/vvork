@@ -141,8 +141,8 @@ const ShiftsWorkerWOAgent = () => {
     };
 
     const shareWhatsApp = () => {
-        const message = shifts.reduce((acc, shift) => {
-            acc += `${shift.day}.${shift.month+1}.${shift.year} ${shift.interval}%0A`;
+        let message = shifts.reduce((acc, shift, i) => {
+            acc += `${i !== 0 ? '___' : ''} ${shift.day}.${shift.month+1}.${shift.year} ${shift.interval} (${shift.place}) ${i !== shifts.length-1 ? '___' : ''}`;
             return acc;
         }, '');
         window.open( "https://wa.me/?text=" + message, '_blank');
@@ -170,10 +170,12 @@ const ShiftsWorkerWOAgent = () => {
                       <span className={style.keyInCircle}>ШЕКЕЛЕЙ</span>
                   </div>
               </div>
-              <div>
-                  <span>Поделиться:</span>
-                  <button type="button" onClick={shareWhatsApp}>WhatsApp</button>
-              </div>
+              {shifts.length > 0 && (
+                  <div>
+                      <span>Отправить часы работы на </span>
+                      <button className={style.whatsApp} type="button" onClick={shareWhatsApp}>WhatsApp</button>
+                  </div>
+              )}
               <ul className={style.alerts}>
                   <li>* Если у работы есть перерыв, то его время вычитается из вашего заработка</li>
               </ul>
